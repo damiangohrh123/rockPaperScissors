@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //Randomly pick between rock,paper, scissors.
+        function getComputerChoice() {
+            let randomNumber = Math.floor(Math.random() * 3);
+
+            switch (randomNumber) {
+                case (0):
+                    return 'ROCK';
+                break;
+                case (1):
+                    return 'PAPER';
+                break;
+                case(2):    
+                    return 'SCISSORS';
+                    break;
+            }
+        }
+        //Declare who's the winner by comparing the variables.
+        function playRound(playerSelection, computerSelection) {
+
+            if (playerSelection === computerSelection){
+                console.log('It\'s a tie!');
+            }
+            else if ((playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
+                    (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
+                    (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')) {
+                        console.log('You Win!');
+                        playerPoints++;
+            }
+            else if ((playerSelection === 'ROCK' && computerSelection === 'PAPER') ||
+                    (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') ||
+                    (playerSelection === 'SCISSORS' && computerSelection === 'ROCK')) {
+                        console.log('You Lose!');
+                        computerPoints++;
+                    }
+        }
+        //Prompt the player to choose rock,papper,scissors
+        function playerPrompt() {
+            playerSelection = prompt('Rock, Paper or scissors?', '');
+            playerSelection = playerSelection.toUpperCase();
+
+            if (playerSelection === 'ROCK' || playerSelection === 'PAPER' || playerSelection === 'SCISSORS') {
+                return playerSelection;
+            }
+            else {
+                alert('Please pick between rock,paper, or scissors.');
+                playerPrompt();
+            }
+        }
+
+        function game() {
+            const computerSelection = getComputerChoice();
+            const playerSelectiopn = playerPrompt();
+            playRound(playerSelection, computerSelection);
+            console.log('player: ' + playerSelectiopn)
+            console.log('Computer: ' + computerSelection);
+        }
+        
+        function gamerounds(){
+            for (i = 0; i < 5; i++) {
+                game();
+            }
+
+            if (playerPoints > computerPoints) {
+                alert('Congratulations! You have won!')
+            }
+            else if (playerPoints === computerPoints){
+                alert('It\'s a tie!')
+            }
+            else {
+                alert('Sad...You lost...')
+            }
+        }
+
+        let playerPoints = 0;
+        let computerPoints = 0;
+        gamerounds();
+        
+
+
+
+
+    </script>
+    
+</body>
+</html>
